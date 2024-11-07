@@ -28,18 +28,17 @@ class BookDetailService {
     }
     
     //Tăng số lượng borrow
-    async isBorrowed(id, username, amount){
+    async isBorrowed(id, username){
         await this.BookDetail.updateOne(
             {_id: new ObjectId(id)}, 
             { $inc: 
                 {
                     borrowCount: 1,
-                    amount: -1,
                 },
             $set: 
                 {
                     username: username,
-                    available: amount <= 0 ? false : true,
+                    available: false,
                 },
             },
             );
@@ -49,9 +48,7 @@ class BookDetailService {
     async returnBorrow(id){
         await this.BookDetail.updateOne(
             {_id: new ObjectId(id)},
-            { $inc: {
-                amount: 1,
-            },
+            { 
                 $set: 
                 {
                     username: "",
