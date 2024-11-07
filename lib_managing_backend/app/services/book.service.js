@@ -9,12 +9,10 @@ class BookService {
         const book = {
             name: payload.name,
             price:payload.price,
-            amount:payload.amount,
             authorName: payload.authorName,
             publisherName: payload.publisherName,
             publisherAdd: payload.publisherAdd,
-            publishId: payload.publishId,
-            publishYear: payload.publishYear,
+            publishedYear: payload.publishedYear,
             imageURL:payload.imageURL,
             available: payload.available,
             // position: payload.position,
