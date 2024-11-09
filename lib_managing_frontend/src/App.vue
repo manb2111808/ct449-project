@@ -11,6 +11,10 @@
     computed: {
       isLoginPage() {
         return this.$route.name === 'library.login'; // Check if the current route is the login page
+      },
+
+       isRegisterPage() {
+        return this.$route.name === 'library.register'; // Check if the current route is the register page
       }
     },
     components: {
@@ -27,7 +31,7 @@
     <header>
       <!-- Render the appropriate header based on the page and login status -->
       <AppHeader v-if="checkLogin" />
-      <LoginHeader v-if="!checkLogin && isLoginPage" />
+      <LoginHeader v-if="!checkLogin && (isLoginPage || isRegisterPage)" />
     </header>
     <div class="container">
       <router-view />

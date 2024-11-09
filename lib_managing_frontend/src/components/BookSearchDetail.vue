@@ -22,16 +22,10 @@
                 <dd class="detailValue">{{ book.publisherName }}</dd>
                 <dd></dd>
                 <dd class="detailField">Địa chỉ nhà xuất bản:</dd>
-                <dd class="detailValue">{{ book.publisherAdd }}</dd>
+                <dd class="detailValue">{{ book.publisherAddress }}</dd>
                 <dd></dd>
                 <dd class="detailField">Năm xuất bản:</dd>
-                <dd class="detailValue">{{ book.publishedYear }}</dd>
-                <!-- <dd></dd>
-                <dd class="detailField">Mã số kệ sách</dd>
-                <dd class="detailValue">{{ book.position }}</dd>
-                <dd></dd>
-                <dd class="detailField">Thể loại</dd>
-                <dd class="detailValue">{{ book.genre }}</dd> -->
+                <dd class="detailValue">{{ book.publishYear }}</dd>
             </dl>
         </div>
         <div id="detail-Area">

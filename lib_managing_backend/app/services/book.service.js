@@ -15,8 +15,6 @@ class BookService {
             publishYear: payload.publishYear,
             imageURL:payload.imageURL,
             available: payload.available,
-            // position: payload.position,
-            // genre: payload.genre,
         };
 
         Object.keys(book).forEach(

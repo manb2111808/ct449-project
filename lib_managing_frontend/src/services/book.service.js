@@ -23,12 +23,6 @@ class BookService {
     async delete(id){
         return (await this.api.delete(`/${id}`)).data;
     }
-    // async count(){
-    //     return (await this.api.get("/count")).data;
-    // }
-    // async countGenre(genre){
-    //     return (await this.api.get(`/count/${genre}`)).data;
-    // }
     async addDetail(id){
         return (await this.api.get(`/add/${id}`)).data;
     }

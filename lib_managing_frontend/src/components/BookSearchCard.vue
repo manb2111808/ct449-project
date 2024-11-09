@@ -2,6 +2,7 @@
     <div class="input-group">
         <InputSearch v-model="searchedBook"/>
     </div>
+    <button class="mt-4"><router-link class="btn" to="/addBook">Thêm sách</router-link></button>
     <div class="SearchItems-Group">
         <BookList
             v-if="filteredBooksCount > 0"
