@@ -13,11 +13,12 @@ exports.create = async (req, res, next) => {
 
     try {
         const bookService = new BookService(MongoDB.client);
+        
         const document = await bookService.create(req.body);
         return res.send(document);
     } catch (err){
         return next (
-            new ApiError(500, "Lỗi xảy ra khi create book")
+            new ApiError(500, "Lỗi xảy ra tạo book")
         );
     }
 }

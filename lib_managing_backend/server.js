@@ -5,14 +5,14 @@ const MongoDB = require("./app/utils/mongodb.util");
 async function startServer() {
     try {
         await MongoDB.connect (config.db.uri);
-        console.log("Kết nối thành công cơ sở dữ liệu!");
+        console.log("Kết nối database thành công!");
 
         const PORT = config.app.port;
         app.listen(PORT, () => {
-            console.log(`Server đang chạy trên port: ${PORT}`);
+            console.log(`Server đang chạy trên cổng: ${PORT}`);
         })
     } catch (err) {
-        console.log("Không thể kết nối Cơ sở dữ liệu!", err);
+        console.log("Lỗi kết nối database!", err);
         process.exit();
     }
 }

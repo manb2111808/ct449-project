@@ -1,9 +1,21 @@
 <script>
   import AppHeader from "@/components/AppHeader.vue";
+  import LoginHeader from "@/components/LoginHeader.vue";
   import AppFooter from "@/components/AppFooter.vue";
   export default {
+    data(){
+      return{
+        checkLogin: localStorage.getItem("user") ? true : false,
+      }
+    },
+    computed: {
+      isLoginPage() {
+        return this.$route.name === 'library.login'; // Check if the current route is the login page
+      }
+    },
     components: {
       AppHeader,
+      LoginHeader,
       AppFooter,
     },
   };
@@ -13,7 +25,9 @@
 <template>
   <div id="app">
     <header>
-      <AppHeader/>
+      <!-- Render the appropriate header based on the page and login status -->
+      <AppHeader v-if="checkLogin" />
+      <LoginHeader v-if="!checkLogin && isLoginPage" />
     </header>
     <div class="container">
       <router-view />

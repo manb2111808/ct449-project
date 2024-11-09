@@ -9,7 +9,7 @@ const MongoDB = require("../utils/mongodb.util");
 exports.borrow = async (req, res, next) => {
     try{   
         const bookDetailService = new BookDetailService(MongoDB.client);
-        await bookDetailService.isBorrowed(req.params.id, req.query.username);
+        await bookDetailService.incBorrow(req.params.id, req.query.username);
     return res.send(null);
     } catch (err) {
         return next(new ApiError(

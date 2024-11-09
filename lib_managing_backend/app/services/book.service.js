@@ -1,18 +1,18 @@
 const { ObjectId } = require("mongodb");
+const PublisherService = require("./publisher.service");
 
 class BookService {
     constructor(client) {
         this.Book = client.db().collection("book");
+        this.publisherService = new PublisherService(client);
     }
 
     extractBookData(payload){
         const book = {
             name: payload.name,
-            price:payload.price,
             authorName: payload.authorName,
-            publisherName: payload.publisherName,
-            publisherAdd: payload.publisherAdd,
-            publishedYear: payload.publishedYear,
+            price:payload.price,
+            publishYear: payload.publishYear,
             imageURL:payload.imageURL,
             available: payload.available,
             // position: payload.position,
@@ -27,10 +27,21 @@ class BookService {
 
     //Tạo hoặc update sách
     async create(payload) {
+        // Step 1: Fetch the publisher by name
+        const publisher = await this.publisherService.findByName(payload.publisherName);
+        if (!publisher) {
+            throw new Error("Không tìm thấy NXB");
+        }
+
         const book = this.extractBookData(payload); //lấy thông tin sách
+        book.publisherId = publisher._id;
+        book.publisherName = publisher.name;
+        book.publisherAddress = publisher.address;
+        book.bookDetail = []; //set detail thành rỗng (trạng thái mới tạo)
+
         const result = await this.Book.findOneAndUpdate(
-            book,
-            { $set: {bookDetail: [],}}, //set detail thành rỗng (trạng thái mới tạo)
+            { name: book.name },
+            { $set: book}, 
             {returnDocument: "after", upsert: true}
         );
         return result;

@@ -1,12 +1,20 @@
 import { createWebHistory, createRouter } from "vue-router";
 
 import Library from "@/views/Library.vue"
+import Login from '@/views/Login.vue';
 
 const routes = [
 
-    //Trang thư viện
+    // Trang đăng nhập
     {
         path: "/",
+        name: "library.login",
+        component: Login,
+    },
+    
+    // Trang thư viện
+    {
+        path: "/library",
         name: "library",
         component: Library,
     },

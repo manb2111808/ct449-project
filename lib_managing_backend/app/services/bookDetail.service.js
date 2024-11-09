@@ -12,7 +12,7 @@ class BookDetailService {
         };
 
         Object.keys(bookDetail).forEach(
-            (key) => bookDetail[key] === undefined && delete bookDetail[key] //dọn dữ liệu
+            (key) => bookDetail[key] === undefined && delete bookDetail[key] //dọn dữ liệu của detail
         );
         return bookDetail;
     }
@@ -28,7 +28,7 @@ class BookDetailService {
     }
     
     //Tăng số lượng borrow
-    async isBorrowed(id, username){
+    async incBorrow(id, username){
         await this.BookDetail.updateOne(
             {_id: new ObjectId(id)}, 
             { $inc: 
