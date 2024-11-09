@@ -53,8 +53,8 @@ export default {
     computed: {
         bookString() {
             return this.books.map((book) => {
-                const { name, price, authorName, publishInfo, publishYear } = book;
-                return [name, price, authorName, publishInfo, publishYear].join(""); //tạo một string các thông tin của book để cho bên filterBooks
+                const { name, price, authorName, publisherName, publishYear } = book;
+                return [name, price, authorName, publisherName, publishYear].join(""); //tạo một string các thông tin của book để cho bên filterBooks
             });
         },
 

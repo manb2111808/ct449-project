@@ -13,6 +13,9 @@ router.route("/:id")
     .delete(publishers.delete);
 
 // router.route("/:name")
-//     .get(publishers.findByName);
-    
+//     .get(publishers.searchByName);
+
+router.route("/search")
+    .get(publishers.searchByName);
+
 module.exports = router;

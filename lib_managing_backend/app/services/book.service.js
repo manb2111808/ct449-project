@@ -11,6 +11,8 @@ class BookService {
         const book = {
             name: payload.name,
             authorName: payload.authorName,
+            publisherName: payload.publisherName,
+            publisherAddress: payload.publisherAddress,
             price:payload.price,
             publishYear: payload.publishYear,
             imageURL:payload.imageURL,
@@ -24,22 +26,32 @@ class BookService {
     }
 
     //Tạo hoặc update sách
+    // async create(payload) {
+    //     // Step 1: Fetch the publisher by name
+    //     const publisher = await this.publisherService.findByName(payload.publisherName);
+    //     if (!publisher) {
+    //         throw new Error("Không tìm thấy NXB");
+    //     }
+
+    //     const book = this.extractBookData(payload); //lấy thông tin sách
+    //     book.publisherId = publisher._id;
+    //     book.publisherName = publisher.name;
+    //     book.publisherAddress = publisher.address;
+    //     book.bookDetail = []; //set detail thành rỗng (trạng thái mới tạo)
+
+    //     const result = await this.Book.findOneAndUpdate(
+    //         { name: book.name },
+    //         { $set: book}, 
+    //         {returnDocument: "after", upsert: true}
+    //     );
+    //     return result;
+    // }
+
     async create(payload) {
-        // Step 1: Fetch the publisher by name
-        const publisher = await this.publisherService.findByName(payload.publisherName);
-        if (!publisher) {
-            throw new Error("Không tìm thấy NXB");
-        }
-
-        const book = this.extractBookData(payload); //lấy thông tin sách
-        book.publisherId = publisher._id;
-        book.publisherName = publisher.name;
-        book.publisherAddress = publisher.address;
-        book.bookDetail = []; //set detail thành rỗng (trạng thái mới tạo)
-
+        const book = this.extractBookData(payload);
         const result = await this.Book.findOneAndUpdate(
-            { name: book.name },
-            { $set: book}, 
+            book,
+            { $set: {bookDetail: [],}},
             {returnDocument: "after", upsert: true}
         );
         return result;

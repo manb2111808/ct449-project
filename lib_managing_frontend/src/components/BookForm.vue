@@ -25,34 +25,24 @@
             <ErrorMessage name="author-name" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="publisher">Tên nhà xuất bản:</label>
+            <label for="publisherName">Tên nhà xuất bản:</label>
             <Field
-                name="publisher"
+                name="publisherName"
                 type="text"
                 class="form-control"
-                v-model="book.publishInfo"
+                v-model="book.publisherName"
             />
-            <ErrorMessage name="publisher" class="error-feedback" />
+            <ErrorMessage name="publisherName" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="publishAddress">Địa chỉ nhà xuất bản:</label>
+            <label for="publisherAddress">Địa chỉ nhà xuất bản:</label>
             <Field
-                name="publishAddress"
+                name="publisherAddress"
                 type="text"
                 class="form-control"
-                v-model="book.publishAddress"
+                v-model="book.publisherAddress"
             />
-            <ErrorMessage name="publishAddress" class="error-feedback" />
-        </div>
-        <div class="form-group">
-            <label for="publishId">Mã nhà xuất bản:</label>
-            <Field
-                name="publishId"
-                type="text"
-                class="form-control"
-                v-model="book.publishId"
-            />
-            <ErrorMessage name="publishId" class="error-feedback" />
+            <ErrorMessage name="publisherAddress" class="error-feedback" />
         </div>
         <div class="form-group">
             <label for="price">Đơn giá:</label>
@@ -73,46 +63,6 @@
                 v-model="book.publishYear"
             />
             <ErrorMessage name="publishYear" class="error-feedback" />
-        </div>
-        <div class="form-group">
-            <label for="position">Vị trí:</label>
-            <Field
-                name="position"
-                as="select"
-                class="form-control"
-                v-model="book.position"
-            >
-                <option value="I5">I5</option>
-                <option value="I6">I6</option>
-                <option value="I7">I7</option>
-                <option value="I8">I8</option>
-                <option value="I9">I9</option>
-                <option value="J1">J1</option>
-                <option value="J2">J2</option>
-                <option value="K4">K4</option>
-                <option value="K5">K5</option>
-                <option value="AA">AA</option>
-            </Field>
-            <ErrorMessage name="position" class="error-feedback" />
-        </div>
-        <div class="form-group">
-            <label for="genre">Thể loại:</label>
-            <Field
-                name="genre"
-                as="select"
-                class="form-control"
-                v-model="book.genre"
-            >
-                <option value=""></option>
-                <option value="Fantasy">Giả tưởng</option>
-                <option value="Scifi">Khoa học viễn tưởng</option>
-                <option value="Romance">Tình cảm</option>
-                <option value="Horror">Kinh dị</option>
-                <option value="Classic">Văn học kinh điển</option>
-                <option value="Document">Tài liệu</option>
-                <option value="More">Khác</option>
-            </Field>
-            <ErrorMessage name="genre" class="error-feedback" />
         </div>
         <div class="form-group">
             <label for="image-url">Ảnh sách:</label>
@@ -143,6 +93,7 @@
 import "boxicons";
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
+import publisherService from '@/services/publisher.service';
 
 export default {
     components: {
@@ -168,29 +119,19 @@ export default {
                 .string()
                 .required("Thiếu tên tác giả")
                 .max(100,'Tên tác giả có tối đa 100 ký tự'),
-            'publisher': yup
+            'publisherName': yup
                 .string()
                 .required('Thiếu tên NXB')
                 .max(100,'Tên NXB có tối đa 100 ký tự'),
-            'publishAddress': yup
+            'publisherAddress': yup
                 .string()
                 .required('Thiếu địa chỉ NXB')
                 .max(100,'Địa chỉ NXB có tối đa 100 ký tự'),
-            'publishId': yup
-                .string()
-                .required('Thiếu ID nhà xuất bản')
-                .max(50,'ID nhà xuất bản có tối đa 50 ký tự'),
             'price': yup
                 .number()
                 .required('Thiếu đơn giá')
                 .min(0, 'Đơn giá không âm')
                 .max(1000000, 'Đơn giá tối đa 1.000.000'),
-            'position': yup
-                .string()
-                .required('Vị trí không thể trống'),
-            'genre': yup
-                .string()
-                .required('Thể loại không thể trống'),
             'image-url': yup
                 .string()
                 .required('Thiếu đường link ảnh'),
@@ -203,9 +144,30 @@ export default {
     },
 
     methods:{
-        submitBook() {
-            this.$emit('submit:book', this.book);
+        async submitBook() {
+            try {
+                // Check if publisher name and address are provided
+                if (this.book.publisherName && this.book.publisherAddress) {
+                    // Create a new publisher if not already in the system
+                    const publisherData = {
+                        name: this.book.publisherName,
+                        address: this.book.publisherAddress,
+                    };
+
+                    await publisherService.add(publisherData);  // Add the publisher
+                    console.log('New Publisher added:', publisherData); // For debugging
+                }
+
+                // After publisher is added, submit the book data
+                this.$emit('submit:book', this.book);
+            } catch (error) {
+                console.error('Error adding publisher or book:', error);
+            }
         },
+
+        // submitBook() {
+        //     this.$emit('submit:book', this.book);
+        // },
 
         deleteBook() {
             this.$emit('delete:book', this.book._id);

@@ -39,15 +39,19 @@ class PublisherService {
         return await this.Publisher.findOne({ _id: ObjectId.isValid(id) ? new ObjectId(id) : null });
     }
 
-    // async findByName(name){
-    //     return await this.find({
-    //         name: {$regex: new RegExp(name), $options: "i"},
-    //     });
+    // async findByName(name) {
+    //     return await this.Publisher.find({
+    //         name: { $regex: new RegExp(name, "i") }
+    //     }).toArray();
     // }
 
     async findByName(name) {
-        return await this.Publisher.findOne({ name: name });
+        return await this.Publisher.find({ name: name }).toArray();
     }
+
+    // async findByName(name) {
+    //     return await this.Publisher.findOne({ name: name });
+    // }
 
     async update(id, payload) {
         const publisher = this.extractPublisherData(payload);

@@ -14,9 +14,6 @@
                             <router-link class="btn" to="/library">Trang chủ</router-link>
                         </li>
                         <li class="nav-item border border-dark">
-                            <router-link class="btn" to="/DataChart">Thống kê</router-link>
-                        </li>
-                        <li class="nav-item border border-dark">
                             <router-link class="btn" to="/borrowList">Sách đang mượn</router-link>
                         </li>
                     </ul>

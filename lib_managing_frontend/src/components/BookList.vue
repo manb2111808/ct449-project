@@ -18,26 +18,25 @@
                     <p>Tác giả: {{ book.authorName }}</p>
                     <p>Nhà xuất bản: {{ book.publisherName }}</p>
                     <p>Địa chỉ nhà xuất bản: {{ book.publisherAddress }}</p>
-                <p>Năm xuất bản: {{ book.publishYear }}</p>
+                    <p>Năm xuất bản: {{ book.publishYear }}</p>
                 </dl>
-
+                Edit Button
+                <router-link :to="{ name: 'library.edit', params: { id: book._id } }">
+                    <button>Chỉnh sửa <box-icon id="edit" color="#ffb703" size="20px" name="edit" type="solid"></box-icon></button>
+                </router-link> 
                 <!-- Table for book details -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>TT</th>
-                            <th>Mã</th>
-                            <th>Số lần mượn</th>
+                           <th>Số lần mượn</th>
                             <th>Trạng thái</th>
                             <th>Cho mượn</th>
                             <th>Trả sách</th>
-                            <th>Xóa</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(detail, idx) in book.details" :key="detail._id">
-                            <th>{{ idx + 1 }}</th>
-                            <th>{{ detail._id }}</th>
                             <th>{{ detail.borrowCount }}</th>
                             <th>
                                 <box-icon :color="detail.available ? 'green' : 'red'" type="solid" name="circle"></box-icon>
@@ -50,17 +49,11 @@
                                 <box-icon @click="returnBorrow(detail._id)" id="return" color="#f77f00" type="solid" name="book"></box-icon>
                             </th>
                             <th v-else></th>
-                            <th>
-                                <box-icon @click="deleteDetail(detail._id)" id="remove" color="#D62828" type="solid" name="folder-minus"></box-icon>
-                            </th>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- Edit Button -->
-                <!-- <router-link :to="{ name: 'library.edit', params: { id: book._id } }">
-                    <button>Chỉnh sửa <box-icon id="edit" color="#ffb703" size="20px" name="edit" type="solid"></box-icon></button>
-                </router-link> -->
+                
             </div>
         </div>
     </div>

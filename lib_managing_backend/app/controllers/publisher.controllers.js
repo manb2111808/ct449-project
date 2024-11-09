@@ -37,6 +37,20 @@ exports.findOne = async (req, res, next) => {
     }
 };
 
+exports.searchByName = async (req, res, next) => {
+    try {
+        const publisherService = new PublisherService(MongoDB.client);
+        const document = await publisherService.findByName(req.query.name);
+
+        if (!document || document.length === 0) {
+            return next(new ApiError(404, "Không tìm thấy NXB"));
+        }
+        return res.send(document);
+    } catch (err) {
+        return next(new ApiError(500, "Lỗi khi tìm kiếm NXB"));
+    }
+};
+
 exports.update = async (req, res, next) => {
     try {
         const publisherService = new PublisherService(MongoDB.client);
