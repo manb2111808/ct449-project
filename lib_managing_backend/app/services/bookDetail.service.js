@@ -21,7 +21,7 @@ class BookDetailService {
         const bookDetail = this.extractBookDetailData(payload);
         const result = await this.BookDetail.findOneAndUpdate(
             bookDetail,
-            { $set: {available: true, borrowCount: 1}},
+            { $set: {available: true, borrowCount: 0}},
             {returnDocument: "after", upsert: true}
         );
         return result;

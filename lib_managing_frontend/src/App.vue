@@ -33,7 +33,7 @@
       <AppHeader v-if="checkLogin" />
       <LoginHeader v-if="!checkLogin && (isLoginPage || isRegisterPage)" />
     </header>
-    <div class="container">
+    <div class="container mt-3">
       <router-view />
     </div>
     <footer>
@@ -52,7 +52,9 @@
 </style>
 <style>
 header {
-  margin-bottom: 20px;
+  padding-bottom: 50px;
+  margin-top: 20px;
+  background-color: #F2E9E4;
 }
 
 footer {

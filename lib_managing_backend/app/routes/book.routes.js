@@ -12,8 +12,8 @@ router.route("/add/:id")
     .get(books.addDetail)
 
 
-router.route("/available")
-    .get(books.findAllAvailable);
+// router.route("/available")
+//     .get(books.findAllAvailable);
 
 // router.route("/count")
 //     .get(books.count);

@@ -26,8 +26,8 @@
                         </dl>
                     </div>
 
-                    <!-- <box-icon id="add" @click="addDetail(book._id)" color="green" size="28px" animation='tada-hover' type='solid' name='book-add'></box-icon> -->
-                    <button id="add" @click="addDetail(book._id)" name='book-add'>Thêm sách</button>
+                    <box-icon id="add" @click="addDetail(book._id)" color="green" size="28px" animation='tada-hover' type='solid' name='book-add'></box-icon>
+                    
                     <div id="detail-Area">
                         <table class="table table-striped">
                             <thead>
@@ -36,9 +36,8 @@
                                     <th>Mã</th>
                                     <th>Số lần mượn</th>
                                     <th>Trạng thái</th>
-                                    <th></th>
-                                    <!-- <th>Cho mượn</th>
-                                    <th>Trả sách</th> -->
+                                    <th>Cho mượn</th>
+                                    <th>Trả sách</th>
                                     <th>Xóa</th>
                                 </tr>
                             </thead>
@@ -66,15 +65,14 @@
                                     <th v-if="detail.available"><box-icon color="green" type='solid' name='circle'></box-icon></th>
                                     <th v-else><box-icon color="red" type='solid' name='circle'></box-icon></th>
                                     <th v-if="detail.available">
-                                        <!-- <box-icon @click="borrowBook(detail._id, book.name)" id="borrow" color="#00b4d8" type='solid' name='book'></box-icon> -->
+                                        <box-icon @click="borrowBook(detail._id, book.name)" id="borrow" color="#00b4d8" type='solid' name='book'></box-icon>
                                     </th>
                                     <th v-else></th>
-                                    <!-- <th v-if="!detail.available"> -->
-                                        <!-- <box-icon @click="returnBorrow(detail._id)" id="borrow" color="#f77f00" type='solid' name='book'></box-icon> -->
-                                    <!-- </th> -->
-                                    <!-- <th v-else></th> -->
-                                    <th v-if="!detail.available"></th>
-                                    <th v-else><box-icon id="remove" @click="deleteDetail(detail._id, book._id)" color="#D62828" type='solid' name='folder-minus'></box-icon></th>
+                                    <th v-if="!detail.available">
+                                        <box-icon @click="returnBorrow(detail._id)" id="borrow" color="#f77f00" type='solid' name='book'></box-icon>
+                                    </th>
+                                    <th v-else></th>
+                                    <th><box-icon id="remove" @click="deleteDetail(detail._id, book._id)" color="#D62828" type='solid' name='folder-minus'></box-icon></th>
                                 </tr>
                             </tbody>
                         </table>

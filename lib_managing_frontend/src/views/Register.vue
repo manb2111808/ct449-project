@@ -1,55 +1,95 @@
 <template>
   <div class="signup-container">
-    <div class="modal-content">
+    <div class="form-card">
+      <div class="form-header">
+        <h2>Đăng ký tài khoản</h2>
+      </div>
       <Form @submit="submitStaff" :validation-schema="SignInSchema">
-        <div class="modal-header">
-          <h5 class="modal-title">Đăng ký</h5>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
+        <div class="form-body">
+          <div class="input-group">
             <label for="username">Tên đăng nhập:</label>
-            <Field name="username" id="username" type="text" class="form-control" v-model="staffSignIn.username" />
-            <ErrorMessage name="username" class="error-feedback" />
+            <Field
+              name="username"
+              id="username"
+              type="text"
+              placeholder="Nhập tên đăng nhập"
+              class="input-field"
+              v-model="staffSignIn.username"
+            />
+            <ErrorMessage name="username" class="error-message" />
           </div>
 
-          <div class="form-group">
+          <div class="input-group">
             <label for="password">Mật khẩu:</label>
-            <Field name="password" id="password" type="password" class="form-control" v-model="staffSignIn.password" />
-            <ErrorMessage name="password" class="error-feedback" />
+            <Field
+              name="password"
+              id="password"
+              type="password"
+              placeholder="Nhập mật khẩu"
+              class="input-field"
+              v-model="staffSignIn.password"
+            />
+            <ErrorMessage name="password" class="error-message" />
           </div>
 
-          <div class="form-group">
+          <div class="input-group">
             <label for="confirm_password">Nhập lại mật khẩu:</label>
-            <Field name="confirm_password" id="confirm_password" type="password" class="form-control" />
-            <ErrorMessage name="confirm_password" class="error-feedback" />
+            <Field
+              name="confirm_password"
+              id="confirm_password"
+              type="password"
+              placeholder="Xác nhận mật khẩu"
+              class="input-field"
+            />
+            <ErrorMessage name="confirm_password" class="error-message" />
           </div>
 
-          <div class="form-group">
+          <div class="input-group">
             <label for="address">Địa chỉ:</label>
-            <Field name="address" id="address" type="text" class="form-control" v-model="staffSignIn.address" />
-            <ErrorMessage name="address" class="error-feedback" />
+            <Field
+              name="address"
+              id="address"
+              type="text"
+              placeholder="Nhập địa chỉ"
+              class="input-field"
+              v-model="staffSignIn.address"
+            />
+            <ErrorMessage name="address" class="error-message" />
           </div>
 
-          <div class="form-group">
+          <div class="input-group">
             <label for="phone">Số điện thoại:</label>
-            <Field name="phone" id="phone" type="text" class="form-control" v-model="staffSignIn.phone" />
-            <ErrorMessage name="phone" class="error-feedback" />
+            <Field
+              name="phone"
+              id="phone"
+              type="text"
+              placeholder="Nhập số điện thoại"
+              class="input-field"
+              v-model="staffSignIn.phone"
+            />
+            <ErrorMessage name="phone" class="error-message" />
           </div>
 
-          <div class="form-group">
+          <div class="input-group">
             <label for="role">Chức vụ:</label>
-            <Field name="role" id="role" as="select" class="form-control" v-model="staffSignIn.role">
+            <Field
+              name="role"
+              id="role"
+              as="select"
+              class="input-field"
+              v-model="staffSignIn.role"
+            >
               <option value="">Chọn chức vụ</option>
               <option value="staff">Nhân viên</option>
               <option value="manager">Quản lý</option>
               <option value="more">Khác</option>
             </Field>
-            <ErrorMessage name="role" class="error-feedback" />
+            <ErrorMessage name="role" class="error-message" />
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Đăng ký</button>
-          <button type="button" class="btn btn-secondary" @click="goBack">Quay lại</button>
+
+        <div class="form-footer">
+          <button type="submit" class="btn btn-submit">Đăng ký</button>
         </div>
       </Form>
     </div>
@@ -111,14 +151,95 @@ export default {
 
 <style scoped>
 .signup-container {
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background-color: #f7f7f7; */
 }
-.error-feedback {
-  color: red;
-  font-size: 0.875rem;
+
+.form-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #5c8aff;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-submit {
+  background-color: #5c8aff;
+  color: #fff;
+}
+
+.btn-submit:hover {
+  background-color: #4b6fc3;
+}
+
+.btn-cancel {
+  background-color: #ddd;
+}
+
+.btn-cancel:hover {
+  background-color: #bbb;
 }
 </style>

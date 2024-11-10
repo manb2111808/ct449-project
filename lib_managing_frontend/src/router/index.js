@@ -4,6 +4,8 @@ import Library from "@/views/Library.vue"
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 import AddBook from '@/views/BookAdd.vue';
+import BookBorrow from '@/views/BookBorrow.vue';
+import BorrowList from '@/views/Borrow.vue';
 
 const routes = [
 
@@ -41,6 +43,20 @@ const routes = [
         name: "library.edit",
         component: () => import('../views/BookEdit.vue'),
         props: true
+    },
+
+    //Trang mượn sách
+    {
+        path: "/borrow",
+        name: "library.borrow",
+        component: BookBorrow,
+    },
+
+    //Trang danh sách đang được mượn
+    {
+        path: "/borrowList",
+        name: "library.borrowList",
+        component: BorrowList, 
     },
 
 ];

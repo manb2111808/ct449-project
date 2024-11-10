@@ -16,7 +16,7 @@ class BookService {
             price:payload.price,
             publishYear: payload.publishYear,
             imageURL:payload.imageURL,
-            available: payload.available,
+            // available: payload.available,
         };
 
         Object.keys(book).forEach(
@@ -116,9 +116,9 @@ class BookService {
         return result.deletedCount;
     }
 
-    async findAvailable(){
-        return await this.find({ available:true });
-    }
+    // async findAvailable(){
+    //     return await this.find({ available:true });
+    // }
 }
 
 module.exports = BookService;
