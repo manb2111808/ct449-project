@@ -50,16 +50,3 @@
   padding-right: 15px;
 }
 </style>
-<style>
-header {
-  padding-bottom: 50px;
-  margin-top: 20px;
-  background-color: #F2E9E4;
-}
-
-footer {
-  padding-top: 20px;
-  margin-top: 20px;
-  background-color: #F2E9E4;
-}
-</style>

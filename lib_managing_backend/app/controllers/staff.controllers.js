@@ -4,7 +4,7 @@ const MongoDB = require("../utils/mongodb.util");
 
 exports.create = async (req, res, next) => {
     if (!req.body?.username) {
-        return next(new ApiError(400, "Username cannot be empty"));
+        return next(new ApiError(400, "Tên nhân viên không thể trống"));
     }
 
     try {
@@ -13,7 +13,7 @@ exports.create = async (req, res, next) => {
         return res.send(document);
     } catch (err) {
         return next(
-            new ApiError(500, "Lỗi xảy ra khi create staff")
+            new ApiError(500, "Lỗi xảy ra khi tạo admin")
         );
     }
 }
@@ -30,7 +30,7 @@ exports.findAll = async (req, res, next) => {
         }
     } catch (error) {
         return next(
-            new ApiError(500, "An error orcured while retriveing the staffs")
+            new ApiError(500, "Lỗi khi lấy thông tin admin")
         );
     }
 
@@ -81,7 +81,7 @@ exports.delete = async (req, res, next) => {
         const staffService = new StaffService(MongoDB.client);
         const document = staffService.delete(req.params.id);
         if (!document) {
-            return next(new ApiError(404, "Không timg thấy tài khoản"));
+            return next(new ApiError(404, "Không tìm thấy tài khoản"));
         }
 
         return res.send({ message: "Xóa thành công" });
@@ -100,7 +100,7 @@ exports.deleteAll = async (req, res, next) => {
         const staffService = new StaffService(MongoDB.client);
         const deletedCount = await staffService.deleteAll();
         return res.send({
-            message: `${deletedCount} sách xóa thành công`,
+            message: `${deletedCount} admin xóa thành công`,
         });
     } catch (err) {
         return next(new ApiError(
@@ -142,9 +142,9 @@ exports.login = async (req, res, next) => {
 exports.count = async (req, res, next) => {
     try{
         const staffService = new StaffService(MongoDB.client);
-        let staff = await staffService.count({ role: "staff" });
-        let manager = await staffService.count({ role: "manager" });
-        let more = await staffService.count({ role: "more" });
+        let staff = await staffService.count({ role: "nhân viên" });
+        let manager = await staffService.count({ role: "quản lý" });
+        let more = await staffService.count({ role: "khác" });
         return res.send([
             staff,
             manager,

@@ -7,7 +7,7 @@ const session = require('express-session');
 const booksRouter = require("./app/routes/book.routes");
 const bookDetailsRouter = require("./app/routes/bookDetail.routes");
 const publisherRouter = require("./app/routes/publisher.routes");
-// const contactsRouter = require("./app/routes/contact.routes");
+const usersRouter = require("./app/routes/user.routes");
 const staffsRouter = require("./app/routes/staff.routes");
 
 const ApiError = require("./app/api-error");
@@ -27,7 +27,7 @@ app.use(session({
 app.use("/api/books", booksRouter);
 app.use("/api/bookDetails", bookDetailsRouter);
 app.use("/api/publishers", publisherRouter);
-// app.use("/api/contacts", contactsRouter);
+app.use("/api/users", usersRouter);
 app.use("/api/staffs", staffsRouter);
 
 //Kiểm thử server
