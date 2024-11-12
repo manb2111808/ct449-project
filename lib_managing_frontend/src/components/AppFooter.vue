@@ -2,25 +2,8 @@
     <div class="container-fluid text-white-50 footer pt-3 mt-5" style="background-color: #43b3ae;">
             <div class="container ">
                 <div class="row g-5">
-                    <div class="col-lg-5 col-md-6">
-                        <div class="d-flex flex-column footer-item  text-center">
-                            <h4 class="text-light mb-3 text-center">Thông tin thư viện</h4>
-                            <div class="row">
-                                <ul class="col-lg-6 list-unstyled">
-                                        <li ><a class="btn-link text-light" href="#">Về chúng tôi</a></li>
-                                        <li ><a class="btn-link text-light" href="#">Liên hệ</a></li>
-                                        <li ><a class="btn-link text-light" href="#">Chính sách bảo mật</a></li>
-                                </ul>
-                                <ul class="col-lg-6 list-unstyled">
-                                    <li><a class="btn-link text-light" href="#">Điều khoản</a></li>
-                                    <li><a class="btn-link text-light" href="#">Chính sách hoàn trả</a></li>
-                                    <li><a class="btn-link text-light" href="#">FAQ</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-5 col-md-6">
+                    <div class="col-lg-3 col-md-3"></div>
+                    <div class="col-lg-6 col-md-6">
                         <div class="footer-item d-flex flex-column mb-3 align-items-center">
                             <h4 class="text-light mb-3 text-center">Thông tin liên hệ</h4>
                             <div>
@@ -36,6 +19,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-md-3"></div>
                 </div>
             </div>
         </div>
