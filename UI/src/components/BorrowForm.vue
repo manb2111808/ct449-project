@@ -100,6 +100,9 @@ export default {
         dueDate.setDate(dueDate.getDate() + 14); // Add 14 days to current date
         const formattedDueDate = dueDate.toISOString().split('T')[0];
 
+        // Retrieve the current user's name from localStorage
+        // const currentUser = JSON.parse(localStorage.getItem("user")) || {};
+
         return {
             bookDetailId: this.bookDetailId,
             bookName: this.bookName,
@@ -110,6 +113,24 @@ export default {
         }
     },
 
+    mounted() {
+    // Fetch user info from localStorage when component is mounted
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            console.log("Retrieved user from localStorage:", user); // Debugging log
+
+            // Use the correct property name from the stored object
+            if (user && user.username) {
+                this.username = user.username; // Change 'username' to 'fullname' if needed
+                console.log("Username set to:", this.username); // Debugging log
+            } else {
+                console.warn("User object does not have a username property");
+            }
+        } catch (error) {
+            console.error("Error retrieving user from localStorage:", error);
+        }
+    },
+    
     methods: {
         async submitBorrow() {
             const borrowData = {

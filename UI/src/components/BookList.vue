@@ -20,7 +20,7 @@
       </div>
 
       <!-- Book Details Table -->
-      <div class="book-details border border-2 border-dark">
+      <div v-if="isUserLoggedIn" class="book-details border border-2 border-dark">
         <table class="details-table">
           <thead>
             <tr>
@@ -63,15 +63,25 @@ export default {
     props: {
         books: { type: Array, default: [] },
     },
+
     data() {
         return {
             details: [],
             bookDetailsMap: {},
         };
     },
+
     components: {
         RouterLink,
     },
+
+    computed: {
+      isUserLoggedIn() {
+        // Check if user data exists in localStorage
+        return !!localStorage.getItem("user");
+      },
+    },
+
     methods: {
         onClickButton() {
             this.$emit('clicked', '');
