@@ -112,10 +112,6 @@ export default {
 
     methods: {
         async submitBorrow() {
-            this.$emit('submit:bookBorrow',{
-                bookDetailId: this.bookDetailId,
-                username: this.username,
-            });
             const borrowData = {
                 bookDetailId: this.bookDetailId,
                 bookName: this.bookName,
@@ -128,6 +124,7 @@ export default {
                 await BorrowCardService.borrowBook(borrowData);
 
                 // Emit success event and show a success message
+                
                 this.$emit("submit:bookBorrow", borrowData);
                 alert("Sách đã được mượn thành công!");
                 this.$router.push('/library');

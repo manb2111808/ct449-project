@@ -1,16 +1,12 @@
 import createApiClient from "./api.service";
 
-class StaffService {
-    constructor (baseUrl = "/api/staffs") {
+class UserService {
+    constructor (baseUrl = "/api/users") {
         this.api = createApiClient(baseUrl);
     }
 
     async getAll(){
         return (await this.api.get("/")).data;
-    }
-
-    async count(){
-        return (await this.api.put("/count")).data;
     }
 
     async getOneUsername(username){
@@ -19,11 +15,13 @@ class StaffService {
 
     async create(data){
         return (await this.api.post("/", {
+            fullname: data.fullname,
             username: data.username,
             password: data.password,
             address: data.address,
             phone: data.phone,
-            role: data.role,
+            birthday: data.birthday,
+            phai: data.phai
         })).data;
     }
     async deleteAll(){
@@ -47,4 +45,4 @@ class StaffService {
     }
 }
 
-export default new StaffService();
+export default new UserService();

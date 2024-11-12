@@ -83,15 +83,9 @@ exports.delete = async (req, res, next) => {
         if (!document) {
             return next(new ApiError(404, "Không timg thấy tài khoản"));
         }
-
         return res.send({ message: "Xóa thành công" });
     } catch (err) {
-        return next(
-            new ApiError(
-                500,
-                `Lỗi không thể xóa tài khoản có id=${req.params.id}`
-            )
-        )
+        return next(new ApiError(500,`Lỗi không thể xóa tài khoản có id=${req.params.id}`))
     }
 };
 
@@ -143,9 +137,9 @@ exports.login = async (req, res, next) => {
 exports.count = async (req, res, next) => {
     try{
         const userService = new UserService(MongoDB.client);
-        let male = await userService.count({ phai: "Male" });
-        let female = await userService.count({ phai: "Female" });
-        let other = await userService.count({ phai: "Other" });
+        let male = await userService.count({ gender: "Male" });
+        let female = await userService.count({ gender: "Female" });
+        let other = await userService.count({ gender: "Others" });
         return res.send([
             student,
             work,

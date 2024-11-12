@@ -77,7 +77,7 @@ export default {
                 localStorage.setItem("user", JSON.stringify(this.staff));
                 this.localStaff = (JSON.parse(localStorage.getItem("user")));
                 this.$router.push('/library');
-                    
+                
                 } else {
                     throw new Error("Không đúng tài khoản hoặc mật khẩu");
                 }

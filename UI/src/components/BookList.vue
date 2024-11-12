@@ -9,12 +9,8 @@
         <p><strong>Tác giả:</strong> {{ book.authorName }}</p>
         <p><strong>Giá mượn:</strong> {{ book.price }}</p>
         <p><strong>Nhà xuất bản:</strong> {{ book.publisherName }}</p>
-        <p><strong>Address:</strong> {{ book.publisherAddress }}</p>
-        <p><strong>Year:</strong> {{ book.publishYear }}</p>
-        <!-- Edit Button -->
-        <router-link :to="{ name: 'library.edit', params: { id: book._id } }" class="btn btn-warning mt-2 ml-5">
-          Chỉnh sửa
-        </router-link>
+        <p><strong>Địa chỉ nhà xuất bản:</strong> {{ book.publisherAddress }}</p>
+        <p><strong>Năm xuất bản:</strong> {{ book.publishYear }}</p>
       </div>
       <div class="book-image col-md-5">
             <img :src="book.imageURL" alt="Book Image"/>
@@ -25,15 +21,14 @@
 
       <!-- Book Details Table -->
       <div class="book-details border border-2 border-dark">
-        <button @click="addDetail(book._id)" class="add-detail-button">Thêm một bản</button>
         <table class="details-table">
           <thead>
             <tr>
               <th>#</th>
               <th>ID</th>
               <th>Số lần mượn</th>
-              <th>Trạng thái</th>
-              <th>Hành động</th>
+              <th>Mượn sách</th>
+              <th>Trả sách</th>
             </tr>
           </thead>
           <tbody>
@@ -41,14 +36,14 @@
               <td>{{ idx + 1 }}</td>
               <td>{{ detail._id }}</td>
               <td>{{ detail.borrowCount }}</td>
-              <td>
-                <span v-if="detail.available" class="status available">Đang có</span>
-                <span v-else class="status not-available">Đang Mượn</span>
+              <td v-if="detail.available">
+                <box-icon @click="borrowBook(detail._id, book.name)" id="borrow" color="#00b4d8" type='solid' name='book'></box-icon>
               </td>
-              <td>
-                <span v-if="!detail.available"></span>
-                <span v-else @click="deleteDetail(detail._id, book._id)" class="delete-action">Xóa</span>
+              <td v-else></td>
+              <td v-if="!detail.available">
+                <box-icon @click="returnBorrow(detail._id)" id="borrow" color="#f77f00" type='solid' name='book'></box-icon>
               </td>
+              <td v-else></td>
             </tr>
           </tbody>
         </table>
@@ -62,6 +57,7 @@ import "boxicons";
 import { RouterLink } from "vue-router";
 import BookService from "@/services/book.service";
 import bookDetailService from "@/services/bookDetail.service";
+import BorrowCardService from "@/services/borrowCard.service";
 
 export default {
     props: {
@@ -82,16 +78,6 @@ export default {
         },
 
         async addDetail(bookId) {
-            // try {
-            //     const newDetail = await BookService.addDetail(bookId);
-            //     this.$set(this.bookDetailsMap, bookId, [...(this.bookDetailsMap[bookId] || []), newDetail]); 
-            //     alert("Thêm sách thành công!");
-                
-            // } catch (error) {
-            //         alert("Lỗi thêm sách!");
-            //     console.error(error);
-            // }
-
             try {
                 // Attempt to add the new detail for the book
                 console.log("Attempting to add new book detail...");
@@ -144,10 +130,24 @@ export default {
             });
         },
 
-        async returnBorrow(detailId) {
-            await bookDetailService.return(detailId);
-            this.$router.go();
-            alert("Đã hoàn tất trả sách!");
+        async returnBorrow(detailId, borrowCardId) {
+          try {
+              // Step 1: Call the book detail service to update the book status
+              await bookDetailService.return(detailId);
+              
+              // Step 2: Call the borrow card service to delete the corresponding borrow card
+              await BorrowCardService.delete(detailId);
+
+              // Step 3: Refresh the book details
+              this.$router.go();
+
+              // Step 4: Notify the user of the successful return
+              alert("Đã hoàn tất trả sách!");
+
+          } catch (error) {
+              console.error("Error returning book:", error);
+              alert("Lỗi khi trả sách!");
+          }
         },
 
         bookDetails(bookId) {

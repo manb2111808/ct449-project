@@ -6,7 +6,7 @@
     </div>
     <div v-else>
         <p id="display-user"> <box-icon color="white" type='solid'></box-icon> <span>{{ localStaff.username}}</span></p>
-        <a href="/"><button id="logOut" type="button" class="btn btn-outline-danger btn-sm" @click="logOut"><span>Đăng xuất</span> <box-icon color="#dc3545" name='door-open' type='solid' ></box-icon></button></a>
+        <a href="/"><button id="logOut" type="button" class="btn btn-danger btn-sm" @click="logOut"><span>Đăng xuất</span> <box-icon color="white" name='door-open' type='solid' ></box-icon></button></a>
     </div>
 </template>
 

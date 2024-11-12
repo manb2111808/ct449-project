@@ -13,7 +13,7 @@ class UserService {
             address: payload.address,
             phone: payload.phone,
             date: payload.date,
-            phai: payload.phai,
+            gender: payload.gender,
         };
 
         Object.keys(user).forEach(

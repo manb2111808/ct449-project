@@ -4,7 +4,7 @@ import Library from "@/views/Library.vue"
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 import AddBook from '@/views/BookAdd.vue';
-import BookBorrow from '@/views/BookBorrow.vue';
+// import BookBorrow from '@/views/BookBorrow.vue';
 import Borrow from '@/views/Borrow.vue';
 
 const routes = [
@@ -46,11 +46,11 @@ const routes = [
     },
 
     //Trang mượn sách
-    {
-        path: "/borrow",
-        name: "library.borrow",
-        component: BookBorrow,
-    },
+    // {
+    //     path: "/borrow",
+    //     name: "library.borrow",
+    //     component: BookBorrow,
+    // },
 
     //Trang danh sách đang được mượn
     {

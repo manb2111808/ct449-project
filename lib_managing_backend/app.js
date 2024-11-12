@@ -9,6 +9,7 @@ const bookDetailsRouter = require("./app/routes/bookDetail.routes");
 const publisherRouter = require("./app/routes/publisher.routes");
 const usersRouter = require("./app/routes/user.routes");
 const staffsRouter = require("./app/routes/staff.routes");
+const borrowCardRouter = require("./app/routes/borrowCard.routes");
 
 const ApiError = require("./app/api-error");
 
@@ -29,6 +30,7 @@ app.use("/api/bookDetails", bookDetailsRouter);
 app.use("/api/publishers", publisherRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/staffs", staffsRouter);
+app.use("/api/borrowCards", borrowCardRouter);
 
 //Kiểm thử server
 app.get("/", (req, res) => {
