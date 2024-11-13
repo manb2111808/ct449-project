@@ -92,9 +92,9 @@
                             <label for="phai">Giới tính:</label>
                             <Field as="select" name="phai" id="phai" class="form-control" v-model="userSignIn.phai">
                                 <option value="">Chọn giới tính</option>
-                                <option value="male">Nam</option>
-                                <option value="female">Nữ</option>
-                                <option value="other">Khác</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
                             </Field>
                             <ErrorMessage name="phai" class="error-feedback" />
                         </div>

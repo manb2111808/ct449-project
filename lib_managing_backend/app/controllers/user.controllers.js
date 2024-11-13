@@ -79,13 +79,13 @@ exports.update = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     try {
         const userService = new UserService(MongoDB.client);
-        const document = userService.delete(req.params.id);
+        const document = await userService.delete(req.params.id);
         if (!document) {
-            return next(new ApiError(404, "Không timg thấy tài khoản"));
+            return next(new ApiError(404, "Không tìm thấy tài khoản"));
         }
         return res.send({ message: "Xóa thành công" });
     } catch (err) {
-        return next(new ApiError(500,`Lỗi không thể xóa tài khoản có id=${req.params.id}`))
+        return next(new ApiError(500, `Lỗi không thể xóa tài khoản có id=${req.params.id}`));
     }
 };
 
@@ -129,26 +129,6 @@ exports.login = async (req, res, next) => {
         return next(new ApiError(
             500,
             `Lỗi xảy ra khi xác minh đăng nhập`
-        ));
-    }
-};
-
-//Đếm số người dùng theo nghề nghiệp
-exports.count = async (req, res, next) => {
-    try{
-        const userService = new UserService(MongoDB.client);
-        let male = await userService.count({ gender: "Male" });
-        let female = await userService.count({ gender: "Female" });
-        let other = await userService.count({ gender: "Others" });
-        return res.send([
-            student,
-            work,
-            more,
-        ]);
-    } catch (err) {
-        return next(new ApiError(
-            500,
-            `Lỗi xảy ra khi lấy số người dùng theo công việc`
         ));
     }
 };

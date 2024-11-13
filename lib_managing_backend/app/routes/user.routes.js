@@ -7,9 +7,6 @@ router.route("/")
     .get(users.findAll)
     .post(users.create)
     .delete(users.deleteAll);
-
-router.route("/count")
-    .put(users.count);
     
 router.route("/:id")
     .get(users.findOne)

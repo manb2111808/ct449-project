@@ -5,6 +5,7 @@ import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 import AddBook from '@/views/BookAdd.vue';
 import Borrowed from '@/views/BookBorrowed.vue';
+import UserList from '@/views/UserList.vue'
 
 const routes = [
 
@@ -43,6 +44,7 @@ const routes = [
         component: () => import('../views/BookEdit.vue'),
         props: true
     },
+
     //Trang danh sách đang được mượn
     {
         path: "/bookBorrowed",
@@ -50,6 +52,12 @@ const routes = [
         component: Borrowed, 
     },
 
+    //Trang danh sách người dùng
+    {
+        path: "/userList",
+        name: "library.userList",
+        component: UserList, 
+    },
 ];
 
 const router = createRouter({

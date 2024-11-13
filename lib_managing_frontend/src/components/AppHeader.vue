@@ -16,6 +16,9 @@
                         <li class="nav-item border border-dark">
                             <router-link class="btn" to="/bookBorrowed">Sách đang mượn</router-link>
                         </li>
+                        <li class="nav-item border border-dark">
+                            <router-link class="btn" to="/userList">Thông tin tài khoản User</router-link>
+                        </li>
                     </ul>
                 </div>
             </div>

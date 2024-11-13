@@ -12,8 +12,8 @@ class UserService {
             password: payload.password,
             address: payload.address,
             phone: payload.phone,
-            date: payload.date,
-            gender: payload.gender,
+            birthday: payload.birthday,
+            phai: payload.phai,
         };
 
         Object.keys(user).forEach(
@@ -25,11 +25,11 @@ class UserService {
     async create(payload) {
         const user = this.extractUserData(payload);
         const result = await this.User.findOneAndUpdate(
-            user,
-            { $set: {}},
-            {returnDocument: "after", upsert: true}
+            { username: user.username },
+            { $setOnInsert: user }, // Use $setOnInsert to create new users
+            { returnDocument: "after", upsert: true }
         );
-        return result;
+        return result.value;
     }
 
     async find(filter){
