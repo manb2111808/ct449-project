@@ -9,8 +9,8 @@
         <p><strong>Tác giả:</strong> {{ book.authorName }}</p>
         <p><strong>Giá mượn:</strong> {{ book.price }}</p>
         <p><strong>Nhà xuất bản:</strong> {{ book.publisherName }}</p>
-        <p><strong>Address:</strong> {{ book.publisherAddress }}</p>
-        <p><strong>Year:</strong> {{ book.publishYear }}</p>
+        <p><strong>Địa chỉ nhà xuất bản:</strong> {{ book.publisherAddress }}</p>
+        <p><strong>Năm xuất bản:</strong> {{ book.publishYear }}</p>
         <!-- Edit Button -->
         <router-link :to="{ name: 'library.edit', params: { id: book._id } }" class="btn btn-warning mt-2 ml-5">
           Chỉnh sửa

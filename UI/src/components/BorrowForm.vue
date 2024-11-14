@@ -62,7 +62,7 @@
             <ErrorMessage name="due_date" class="error-feedback" />
         </div>
         <div class="form-group">
-            <button class="btn btn-primary">Lưu</button>
+            <button class="btn btn-primary">Mượn sách</button>
         </div>
     </Form>
 </template>
